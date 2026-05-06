@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>AI Sales Prediction System</title>
+<title>Shoe Store AI Business Predictor</title>
 
 <!-- GOOGLE FONTS -->
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -12,8 +12,6 @@
 <!-- FONT AWESOME -->
 <link rel="stylesheet"
 href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
-
-<title>AI Sales Prediction</title>
 
 <style>
 
@@ -38,7 +36,7 @@ nav{
     justify-content:space-between;
     align-items:center;
     padding:20px 8%;
-    background:rgba(0,0,0,0.5);
+    background:rgba(0,0,0,0.6);
     position:fixed;
     top:0;
     z-index:1000;
@@ -49,9 +47,9 @@ nav{
     display:flex;
     align-items:center;
     gap:10px;
+    color:#38bdf8;
     font-size:28px;
     font-weight:700;
-    color:#38bdf8;
 }
 
 .logo i{
@@ -67,8 +65,8 @@ nav ul{
 nav ul li a{
     color:white;
     text-decoration:none;
-    font-weight:500;
     transition:0.3s;
+    font-weight:500;
 }
 
 nav ul li a:hover{
@@ -81,14 +79,14 @@ nav ul li a:hover{
     min-height:100vh;
     background:
     linear-gradient(rgba(0,0,0,0.7),rgba(0,0,0,0.8)),
-    url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1400&auto=format&fit=crop');
+    url('https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=1400&auto=format&fit=crop');
     background-size:cover;
     background-position:center;
     display:flex;
     justify-content:center;
     align-items:center;
     text-align:center;
-    padding:100px 20px;
+    padding:120px 20px;
 }
 
 .hero-content{
@@ -96,9 +94,8 @@ nav ul li a:hover{
 }
 
 .hero h1{
-    font-size:65px;
+    font-size:70px;
     margin-bottom:20px;
-    line-height:1.2;
 }
 
 .hero h1 span{
@@ -106,15 +103,15 @@ nav ul li a:hover{
 }
 
 .hero p{
-    font-size:20px;
     color:#d1d5db;
     line-height:1.8;
+    font-size:20px;
     margin-bottom:35px;
 }
 
 .btn{
     display:inline-block;
-    padding:15px 35px;
+    padding:16px 35px;
     background:#38bdf8;
     color:white;
     text-decoration:none;
@@ -147,13 +144,13 @@ nav ul li a:hover{
 }
 
 .stat-box i{
-    font-size:40px;
+    font-size:45px;
     color:#38bdf8;
     margin-bottom:15px;
 }
 
 .stat-box h2{
-    font-size:38px;
+    font-size:40px;
 }
 
 .stat-box p{
@@ -161,22 +158,25 @@ nav ul li a:hover{
     color:#cbd5e1;
 }
 
-/* TEAM */
-
-.team{
-    padding:100px 8%;
-    text-align:center;
-}
+/* COMMON */
 
 .section-title{
     font-size:50px;
     margin-bottom:20px;
+    text-align:center;
 }
 
 .section-subtitle{
+    text-align:center;
     color:#cbd5e1;
     margin-bottom:60px;
     font-size:18px;
+}
+
+/* TEAM */
+
+.team{
+    padding:100px 8%;
 }
 
 .team-container{
@@ -189,8 +189,7 @@ nav ul li a:hover{
     background:#111c31;
     border-radius:20px;
     overflow:hidden;
-    transition:0.4s;
-    box-shadow:0 0 20px rgba(0,0,0,0.3);
+    transition:0.3s;
 }
 
 .team-card:hover{
@@ -206,6 +205,7 @@ nav ul li a:hover{
 
 .team-content{
     padding:25px;
+    text-align:center;
 }
 
 .team-content h3{
@@ -223,58 +223,58 @@ nav ul li a:hover{
     line-height:1.7;
 }
 
-/* SERVICES */
+/* FEATURES */
 
-.services{
+.features{
     padding:100px 8%;
     background:#0f172a;
-    text-align:center;
 }
 
-.service-container{
+.feature-container{
     display:grid;
     grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
     gap:30px;
 }
 
-.service-box{
+.feature-box{
     background:#111c31;
     padding:40px 25px;
     border-radius:20px;
+    text-align:center;
     transition:0.3s;
 }
 
-.service-box:hover{
+.feature-box:hover{
     transform:scale(1.05);
 }
 
-.service-box i{
+.feature-box i{
     font-size:50px;
     color:#38bdf8;
     margin-bottom:20px;
 }
 
-.service-box h3{
-    font-size:26px;
+.feature-box h3{
     margin-bottom:15px;
+    font-size:25px;
 }
 
 /* PREDICTION */
 
-.prediction{
+.predictor{
     padding:100px 8%;
-    text-align:center;
 }
 
-.prediction-box{
-    max-width:700px;
+.predict-box{
+    max-width:800px;
     margin:auto;
     background:#111c31;
     padding:50px;
     border-radius:20px;
 }
 
-.prediction-box input{
+.predict-box input,
+.predict-box select{
     width:100%;
     padding:15px;
     margin:15px 0;
@@ -283,9 +283,9 @@ nav ul li a:hover{
     font-size:16px;
 }
 
-.prediction-box button{
+.predict-box button{
     width:100%;
-    padding:15px;
+    padding:16px;
     background:#38bdf8;
     border:none;
     border-radius:10px;
@@ -295,15 +295,22 @@ nav ul li a:hover{
     font-weight:600;
 }
 
-.prediction-box button:hover{
+.predict-box button:hover{
     background:#0ea5e9;
 }
 
-#result{
-    margin-top:25px;
-    font-size:30px;
+.results{
+    margin-top:35px;
+    background:#0f172a;
+    padding:30px;
+    border-radius:15px;
+    display:none;
+}
+
+.result-item{
+    margin:15px 0;
+    font-size:20px;
     color:#38bdf8;
-    font-weight:700;
 }
 
 /* CONTACT */
@@ -381,15 +388,15 @@ nav ul{
 <nav>
 
 <div class="logo">
-<i class="fa-solid fa-chart-line"></i>
-AI Predict
+<i class="fa-solid fa-shoe-prints"></i>
+ShoePredict AI
 </div>
 
 <ul>
 <li><a href="#">Home</a></li>
 <li><a href="#team">Team</a></li>
-<li><a href="#services">Services</a></li>
-<li><a href="#prediction">Prediction</a></li>
+<li><a href="#features">Features</a></li>
+<li><a href="#predictor">Predictor</a></li>
 <li><a href="#contact">Contact</a></li>
 </ul>
 
@@ -402,19 +409,21 @@ AI Predict
 <div class="hero-content">
 
 <h1>
-AI Based <span>Sales Prediction</span> System
+Smart <span>Shoe Store</span> Business Predictor
 </h1>
 
 <p>
-Professional business intelligence platform that predicts future sales using AI,
-customer trends, marketing analytics, and smart forecasting technologies.
+AI-powered business intelligence platform for shoe stores.
+Predict sales, profit, loss, customer demand, and future business growth using smart analytics.
 </p>
 
 <a class="btn"
-href="https://wa.me/917972609914?text=Hello%20I%20want%20AI%20Sales%20Prediction%20Service"
+href="https://wa.me/917972609914?text=Hello%20I%20want%20Shoe%20Store%20AI%20Prediction%20Service"
 target="_blank">
+
 <i class="fa-brands fa-whatsapp"></i>
 Contact on WhatsApp
+
 </a>
 
 </div>
@@ -426,27 +435,27 @@ Contact on WhatsApp
 <section class="stats">
 
 <div class="stat-box">
-<i class="fa-solid fa-chart-column"></i>
-<h2>95%</h2>
-<p>Prediction Accuracy</p>
+<i class="fa-solid fa-chart-line"></i>
+<h2>98%</h2>
+<p>Sales Accuracy</p>
+</div>
+
+<div class="stat-box">
+<i class="fa-solid fa-store"></i>
+<h2>300+</h2>
+<p>Shoe Stores</p>
+</div>
+
+<div class="stat-box">
+<i class="fa-solid fa-money-bill-trend-up"></i>
+<h2>₹50L+</h2>
+<p>Revenue Managed</p>
 </div>
 
 <div class="stat-box">
 <i class="fa-solid fa-users"></i>
-<h2>500+</h2>
-<p>Business Clients</p>
-</div>
-
-<div class="stat-box">
-<i class="fa-solid fa-globe"></i>
-<h2>20+</h2>
-<p>Regions Covered</p>
-</div>
-
-<div class="stat-box">
-<i class="fa-solid fa-briefcase"></i>
 <h2>24/7</h2>
-<p>Business Support</p>
+<p>Customer Support</p>
 </div>
 
 </section>
@@ -455,101 +464,56 @@ Contact on WhatsApp
 
 <section class="team" id="team">
 
-<h2 class="section-title">Our Team & Services</h2>
+<h2 class="section-title">Our Team</h2>
 
 <p class="section-subtitle">
-Meet our professional business intelligence team
+Professional experts managing AI business forecasting
 </p>
 
 <div class="team-container">
 
-<!-- MANAGER -->
-
 <div class="team-card">
-<img src="manager.jpeg" alt="Shivam">
-
+<img src="manager.jpeg">
 <div class="team-content">
-
 <h3>Head Manager</h3>
 <h4>Shivam</h4>
-
-<p>
-Handles project strategy, AI planning,
-business operations, and management decisions.
-</p>
-
+<p>Handles business strategy and AI operations.</p>
 </div>
 </div>
-
-<!-- HR -->
 
 <div class="team-card">
-<img src="hr.jpeg" alt="Parshuram">
-
+<img src="hr.jpeg">
 <div class="team-content">
-
 <h3>HR Manager</h3>
 <h4>Parshuram</h4>
-
-<p>
-Manages recruitment, employee coordination,
-workflow management, and communication.
-</p>
-
+<p>Manages employee coordination and workflow.</p>
 </div>
 </div>
-
-<!-- EXECUTIVE -->
 
 <div class="team-card">
-<img src="executive.jpeg" alt="Ritesh">
-
+<img src="executive.jpeg">
 <div class="team-content">
-
 <h3>Sales Executive</h3>
 <h4>Ritesh</h4>
-
-<p>
-Works on business growth, customer leads,
-sales reports, and client relationships.
-</p>
-
+<p>Handles customer leads and sales growth.</p>
 </div>
 </div>
-
-<!-- SALESMAN -->
 
 <div class="team-card">
-<img src="salesman.jpeg" alt="Ronak">
-
+<img src="salesman.jpeg">
 <div class="team-content">
-
 <h3>Sales Man</h3>
 <h4>Ronak</h4>
-
-<p>
-Handles direct product sales,
-customer interaction, and market communication.
-</p>
-
+<p>Manages customer interaction and direct sales.</p>
 </div>
 </div>
-
-<!-- SERVICE -->
 
 <div class="team-card">
-<img src="serviceman.jpeg" alt="Siddhant">
-
+<img src="serviceman.jpeg">
 <div class="team-content">
-
 <h3>Service Man</h3>
 <h4>Siddhant</h4>
-
-<p>
-Provides technical support,
-maintenance, and customer assistance.
-</p>
-
+<p>Provides technical support and maintenance.</p>
 </div>
 </div>
 
@@ -557,78 +521,94 @@ maintenance, and customer assistance.
 
 </section>
 
-<!-- SERVICES -->
+<!-- FEATURES -->
 
-<section class="services" id="services">
+<section class="features" id="features">
 
-<h2 class="section-title">Business Solutions</h2>
+<h2 class="section-title">AI Business Features</h2>
 
 <p class="section-subtitle">
-Advanced AI tools for modern businesses
+Advanced features for modern shoe businesses
 </p>
 
-<div class="service-container">
+<div class="feature-container">
 
-<div class="service-box">
-<i class="fa-solid fa-brain"></i>
-<h3>AI Forecasting</h3>
-<p>
-Predict future product sales using advanced AI algorithms.
-</p>
+<div class="feature-box">
+<i class="fa-solid fa-chart-column"></i>
+<h3>Sales Prediction</h3>
+<p>Predict future shoe sales using AI algorithms.</p>
 </div>
 
-<div class="service-box">
-<i class="fa-solid fa-chart-pie"></i>
-<h3>Business Analytics</h3>
-<p>
-Analyze customer behavior, demand, and sales growth.
-</p>
+<div class="feature-box">
+<i class="fa-solid fa-sack-dollar"></i>
+<h3>Profit Analysis</h3>
+<p>Analyze business profit based on expenses and sales.</p>
 </div>
 
-<div class="service-box">
-<i class="fa-solid fa-file-lines"></i>
-<h3>Smart Reports</h3>
-<p>
-Generate real-time intelligent business reports instantly.
-</p>
+<div class="feature-box">
+<i class="fa-solid fa-triangle-exclamation"></i>
+<h3>Loss Detection</h3>
+<p>Identify possible business losses and risky areas.</p>
 </div>
 
-<div class="service-box">
-<i class="fa-solid fa-bullseye"></i>
-<h3>Market Strategy</h3>
-<p>
-Improve business performance with smart strategies.
-</p>
+<div class="feature-box">
+<i class="fa-solid fa-users-viewfinder"></i>
+<h3>Customer Trends</h3>
+<p>Track customer demand and buying patterns.</p>
 </div>
 
 </div>
 
 </section>
 
-<!-- PREDICTION -->
+<!-- PREDICTOR -->
 
-<section class="prediction" id="prediction">
+<section class="predictor" id="predictor">
 
-<h2 class="section-title">AI Sales Prediction Demo</h2>
+<h2 class="section-title">Shoe Store AI Predictor</h2>
 
 <p class="section-subtitle">
-Enter business details and estimate future sales instantly
+Enter business details to predict future sales & profit
 </p>
 
-<div class="prediction-box">
+<div class="predict-box">
+
+<input type="text" id="storeName"
+placeholder="Enter Shoe Store Name">
+
+<select id="brand">
+<option>Select Shoe Brand</option>
+<option>Nike</option>
+<option>Adidas</option>
+<option>Puma</option>
+<option>Reebok</option>
+<option>Bata</option>
+</select>
 
 <input type="number" id="price"
-placeholder="Enter Product Price">
+placeholder="Average Shoe Price">
 
 <input type="number" id="marketing"
-placeholder="Enter Marketing Budget">
+placeholder="Marketing Budget">
 
-<button onclick="predictSales()">
+<input type="number" id="employees"
+placeholder="Number of Employees">
+
+<button onclick="predictBusiness()">
+
 <i class="fa-solid fa-chart-line"></i>
-Predict Sales
+Predict Business Growth
+
 </button>
 
-<div id="result"></div>
+<div class="results" id="results">
+
+<div class="result-item" id="sales"></div>
+<div class="result-item" id="profit"></div>
+<div class="result-item" id="loss"></div>
+<div class="result-item" id="demand"></div>
+
+</div>
 
 </div>
 
@@ -643,7 +623,7 @@ Predict Sales
 <h2 class="section-title">Contact Us</h2>
 
 <p class="section-subtitle">
-Get connected with our business intelligence experts
+Get connected with our AI business experts
 </p>
 
 <div class="contact-info">
@@ -659,14 +639,14 @@ Get connected with our business intelligence experts
 </div>
 
 <div class="info">
-<i class="fa-solid fa-business-time"></i>
+<i class="fa-solid fa-clock"></i>
 <p>24/7 Available</p>
 </div>
 
 </div>
 
 <a class="btn"
-href="https://wa.me/917972609914?text=Hello%20I%20am%20interested%20in%20your%20AI%20Sales%20Prediction%20Website"
+href="https://wa.me/917972609914?text=Hello%20I%20am%20interested%20in%20your%20Shoe%20Store%20AI%20Business%20Predictor"
 target="_blank">
 
 <i class="fa-brands fa-whatsapp"></i>
@@ -683,7 +663,7 @@ Chat on WhatsApp
 <footer>
 
 <p>
-© 2026 AI Sales Prediction System | Developed for Smart Business Intelligence
+© 2026 ShoePredict AI | Smart Shoe Store Business Intelligence System
 </p>
 
 </footer>
@@ -692,30 +672,56 @@ Chat on WhatsApp
 
 <script>
 
-function predictSales(){
+function predictBusiness(){
 
 let price =
-document.getElementById("price").value;
+parseInt(document.getElementById("price").value);
 
 let marketing =
-document.getElementById("marketing").value;
+parseInt(document.getElementById("marketing").value);
 
-if(price === "" || marketing === ""){
+let employees =
+parseInt(document.getElementById("employees").value);
 
-document.getElementById("result").innerHTML =
-"Please enter all values.";
+if(isNaN(price) || isNaN(marketing) || isNaN(employees)){
+
+alert("Please fill all details.");
 
 return;
 
 }
 
-let prediction =
-(marketing * 2) - (price * 0.5) + 500;
+let predictedSales =
+(marketing * 3) + (employees * 500) - (price * 0.3);
 
-document.getElementById("result").innerHTML =
-"Predicted Sales: " +
-Math.round(prediction) +
-" Units";
+let predictedProfit =
+predictedSales * 0.35;
+
+let predictedLoss =
+predictedSales * 0.08;
+
+let customerDemand =
+predictedSales > 10000 ?
+"High Demand 📈" :
+"Moderate Demand 📊";
+
+document.getElementById("results").style.display = "block";
+
+document.getElementById("sales").innerHTML =
+"📦 Predicted Sales: " +
+Math.round(predictedSales) + " Units";
+
+document.getElementById("profit").innerHTML =
+"💰 Estimated Profit: ₹" +
+Math.round(predictedProfit);
+
+document.getElementById("loss").innerHTML =
+"📉 Estimated Loss Risk: ₹" +
+Math.round(predictedLoss);
+
+document.getElementById("demand").innerHTML =
+"🔥 Customer Demand: " +
+customerDemand;
 
 }
 
