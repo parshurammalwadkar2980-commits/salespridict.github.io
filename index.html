@@ -453,7 +453,7 @@ ShoePredict AI
 <p class="section-subtitle">Enter business details to predict future sales & profit</p>
 
 <div class="predict-box">
-<div id="statusMessage" class="status-msg">🔄 Initializing Regression Model Engine...</div>
+<div id="statusMessage" class="status-msg">🔄 Training Multiple Regression Engine on Sheet Data...</div>
 
 <input type="text" id="storeName" placeholder="Enter Shoe Store Name">
 <select id="brand">
@@ -466,7 +466,7 @@ ShoePredict AI
 </select>
 <input type="number" id="price" placeholder="Average Shoe Price">
 <input type="number" id="marketing" placeholder="Marketing Budget">
-<input type="number" id="employees" placeholder="Number of Employees">
+<input type="number" id="employees" placeholder="Popularity Level (1 to 100)">
 
 <button id="predictBtn" onclick="predictBusiness()" disabled>
 <i class="fa-solid fa-chart-line"></i> Predict Business Growth
@@ -503,97 +503,122 @@ ShoePredict AI
 <script>
 let model;
 
-// 1. GENERATE TRAINING DATA FOR MULTIPLE LINEAR REGRESSION
-// Features Matrix: [Average Shoe Price, Marketing Budget, Number of Employees]
+// 1. EXTRACTED UPLOADED DATASET FROM Project_data.xlsx - Sheet1.csv
+// Independent features matrix: [Price, Marketing, Popularity]
 const trainingFeatures = [
-    [1500, 5000, 2],  [2000, 12000, 4], [1200, 3000, 1],  [3500, 25000, 8],
-    [800, 2000, 2],   [5000, 45000, 12], [2500, 15000, 5], [1800, 8000, 3],
-    [3000, 18000, 6], [1000, 4000, 2],  [4000, 35000, 10], [1600, 9500, 4]
+    [5000, 20000, 90], // Row 1 (Nike)
+    [4500, 15000, 85], // Row 2 (Adidas)
+    [3000, 8000,  70], // Row 3 (Puma)
+    [3500, 12000, 75], // Row 4 (Reebok)
+    [6000, 25000, 95]  // Row 5 (Nike)
 ];
 
-// Target Array: [Units Sold / Sales]
-const trainingTargets = [
-15600, 37400, 9100, 78900,
-7800, 140000, 46700, 25100,
-55200, 12700, 110000, 29900
-];
+// Target Array values from Sheet Data: [Units_Sold]
+const trainingTargets = [150, 130, 110, 95, 180];
 
-// 2. DEFINE, COMPILE & TRAIN THE MACHINE LEARNING MODEL
+// Min-Max limits mapping for Data Normalization to ensure calculation accuracy
+const featureMinMax = {
+    price: { min: 3000, max: 6000 },
+    marketing: { min: 8000, max: 25000 },
+    popularity: { min: 70, max: 95 },
+    targets: { min: 95, max: 180 }
+};
+
+// Data Normalization helper functions
+function normalize(val, bounds) {
+    return (val - bounds.min) / (bounds.max - bounds.min || 1);
+}
+function denormalize(val, bounds) {
+    return val * (bounds.max - bounds.min) + bounds.min;
+}
+
+// 2. INITIALIZE, COMPILE & FIT REGRESSION LAYER SETUP
 async function initRegressionEngine() {
     try {
-        // Create a Sequential Model
+        // Construct standard Sequential architecture model topology
         model = tf.sequential();
         
-        // Add a linear regression layer (input shape is 3 because we have 3 features)
+        // Single Dense Output layer with 3 structural dimensional input shapes
         model.add(tf.layers.dense({
             units: 1, 
             inputShape: [3],
-            kernelInitializer: 'zeros'
+            kernelInitializer: 'ones'
         }));
 
-        // Use Mean Squared Error (MSE) loss function and Adam Optimizer for regression problems
+        // Stochastic configuration mapping using Adam Optimizer and Mean Squared Error Loss
         model.compile({
-            optimizer: tf.train.adam(0.5),
+            optimizer: tf.train.adam(0.1),
             loss: 'meanSquaredError'
         });
 
-        // Convert data arrays into WebGL Tensors
-        const xs = tf.tensor2d(trainingFeatures);
-        const ys = tf.tensor2d(trainingTargets, [trainingTargets.length, 1]);
+        // Normalize dataset arrays to safely establish gradient mapping boundaries
+        const normFeatures = trainingFeatures.map(f => [
+            normalize(f[0], featureMinMax.price),
+            normalize(f[1], featureMinMax.marketing),
+            normalize(f[2], featureMinMax.popularity)
+        ]);
+        const normTargets = trainingTargets.map(t => [normalize(t, featureMinMax.targets)]);
 
-        // Train model behind the scenes for 250 epochs
-        await model.fit(xs, ys, { epochs: 250 });
+        const xs = tf.tensor2d(normFeatures);
+        const ys = tf.tensor2d(normTargets);
 
-        // Clean memory & release components
+        // Train the model across 300 epochs matching matrix variables
+        await model.fit(xs, ys, { epochs: 300 });
+
+        // Memory cleanup allocations
         xs.dispose();
         ys.dispose();
 
-        // Enable button when training completes
-        document.getElementById("statusMessage").innerHTML = "✅ Regression Engine Active & Optimized";
+        // Reveal view configurations upon complete background compilation
+        document.getElementById("statusMessage").innerHTML = "✅ Regression Engine Active (Trained on Sheet Dataset)";
         document.getElementById("statusMessage").style.color = "#10b981";
         document.getElementById("predictBtn").disabled = false;
     } catch(err) {
-        document.getElementById("statusMessage").innerHTML = "❌ Error initializing AI Engine.";
+        document.getElementById("statusMessage").innerHTML = "❌ Model Initialization Failure.";
         console.error(err);
     }
 }
 
-// Initialize on window load
+// Automatically mount model context on startup 
 window.onload = initRegressionEngine;
 
-// 3. RUN INFERENCE (PREDICTION) USING THE TRAINED TENSORFLOW MODEL
+// 3. RUN REAL-TIME REGRESSION PREDICTIONS
 async function predictBusiness(){
     let price = parseInt(document.getElementById("price").value);
     let marketing = parseInt(document.getElementById("marketing").value);
-    let employees = parseInt(document.getElementById("employees").value);
+    let popularity = parseInt(document.getElementById("employees").value);
 
-    if(isNaN(price) || isNaN(marketing) || isNaN(employees)){
-        alert("Please fill all details with valid numbers.");
+    if(isNaN(price) || isNaN(marketing) || isNaN(popularity)){
+        alert("Please completely fill your numerical values.");
         return;
     }
 
-    // Wrap features inside a tensor array for execution
-    const inputTensor = tf.tensor2d([[price, marketing, employees]]);
-    
-    // Perform model.predict() matching trained regression parameters
+    // Protect inputs against boundary limits 
+    let normP = normalize(price, featureMinMax.price);
+    let normM = normalize(marketing, featureMinMax.marketing);
+    let normPop = normalize(popularity, featureMinMax.popularity);
+
+    // Pass features array down tensor infrastructure pipeline
+    const inputTensor = tf.tensor2d([[normP, normM, normPop]]);
     const predictionResult = model.predict(inputTensor);
     const predictionData = await predictionResult.data();
     
-    let predictedSales = predictionData[0];
-    if(predictedSales < 0) predictedSales = 0; // Safeguard lower bound
+    // Convert back down into human readable outputs 
+    let finalUnitsPrediction = denormalize(predictionData[0], featureMinMax.targets);
+    if(finalUnitsPrediction < 0) finalUnitsPrediction = 0; 
 
-    // Clean up input tensors to eliminate browser memory leaks
+    // Release allocated memory spaces immediately 
     inputTensor.dispose();
     predictionResult.dispose();
 
-    // Derived Financial Regression Analytica (Profit and Risk assessment logic)
-    let predictedProfit = predictedSales * 0.35;
-    let predictedLoss = predictedSales * 0.08;
-    let customerDemand = predictedSales > 40000 ? "High Demand 📈" : "Moderate Demand 📊";
+    // Context calculations matching shoe store analytics structure
+    let predictedProfit = finalUnitsPrediction * (price * 0.35);
+    let predictedLoss = finalUnitsPrediction * (price * 0.08);
+    let customerDemand = finalUnitsPrediction > 120 ? "High Demand 📈" : "Moderate Demand 📊";
 
-    // Output Data back to HTML View layer
+    // View component element binding insertions
     document.getElementById("results").style.display = "block";
-    document.getElementById("sales").innerHTML = "📦 Predicted Sales: " + Math.round(predictedSales) + " Units";
+    document.getElementById("sales").innerHTML = "📦 Predicted Sales: " + Math.round(finalUnitsPrediction) + " Units";
     document.getElementById("profit").innerHTML = "💰 Estimated Profit: ₹" + Math.round(predictedProfit);
     document.getElementById("loss").innerHTML = "📉 Estimated Loss Risk: ₹" + Math.round(predictedLoss);
     document.getElementById("demand").innerHTML = "🔥 Customer Demand: " + customerDemand;
